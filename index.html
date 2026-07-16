@@ -1,0 +1,123 @@
+<!-- Part 1/4 -->
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>便利屋 予約フォーム</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>便利屋 予約フォーム</h1>
+
+
+<form id="reservationForm">
+
+
+<label>
+お名前
+</label>
+
+<input 
+type="text"
+id="name"
+required>
+
+
+
+<label>
+電話番号
+</label>
+
+<input
+type="tel"
+id="phone"
+required>
+
+
+
+<label>
+作業内容
+</label>
+
+<select id="work" required>
+
+<option value="">
+選択してください
+</option>
+
+<option>
+🏠 遺品整理
+</option>
+
+<option>
+🧹 お部屋・家の片付け
+</option>
+
+<option>
+📦 不用品の処分
+</option>
+
+<option>
+🔧 その他便利屋業務（お電話にて問い合わせ）
+</option>
+
+</select>
+
+
+
+<label>
+希望日時
+</label>
+
+<input
+type="datetime-local"
+id="dateTime"
+required>
+
+
+
+<label>
+備考
+</label>
+
+<textarea
+id="note"
+placeholder="作業内容の詳細など"></textarea>
+
+
+
+<button type="submit">
+予約する
+</button>
+
+
+</form>
+
+
+<p id="message"></p>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
