@@ -1,21 +1,39 @@
-// script.js
-
-const GAS_URL = "https://script.google.com/macros/s/AKfycbyuYNM-_9U3FAvFMqLZA3G8CKKEl4it6YU4ItMaGkqKjpcPE225hz1KXJ-41laSLvUK/exec";
-
-
-const form = document.getElementById("reservationForm");
-
-const message = document.getElementById("message");
+// =================================
+// 便利屋予約システム script.js
+// =================================
 
 
+// GASウェブアプリURL
+const GAS_URL =
+"https://script.google.com/macros/s/AKfycbyK4PYfJBFkHI0iqmvMmhFjVDPFcLG_1pd6jDsL3uyPsYlxP9gxGMEjZY24GgAhocbe/exec";
+
+
+
+// フォーム取得
+const form =
+document.getElementById("reservationForm");
+
+
+// メッセージ表示場所
+const message =
+document.getElementById("message");
+
+
+
+
+// 送信処理
 
 form.addEventListener("submit", function(e){
+
 
   e.preventDefault();
 
 
 
+  // 入力データ取得
+
   const data = {
+
 
     name:
     document.getElementById("name").value,
@@ -36,62 +54,109 @@ form.addEventListener("submit", function(e){
     note:
     document.getElementById("note").value
 
+
+
   };
 
 
 
+
+
+  // 送信中表示
+
+  message.textContent =
+  "送信中です...";
+
+  message.style.color =
+  "black";
+
+
+
+
+
+  // GASへ送信
+
   fetch(GAS_URL, {
+
 
     method:"POST",
 
-    body:JSON.stringify(data)
 
-  })
-
-
-  .then(response => response.json())
+    mode:"no-cors",
 
 
-  .then(result => {
+    headers:{
 
 
-    if(result.result === "success"){
+      "Content-Type":"text/plain"
 
 
-      message.textContent =
-      "予約を受け付けました。";
+    },
 
 
-      message.style.color="green";
+    body:
+    JSON.stringify(data)
 
-
-      form.reset();
-
-
-    }else{
-
-
-      message.textContent =
-      "送信エラーが発生しました。";
-
-
-    }
 
 
   })
 
 
-  .catch(error => {
+
+  .then(function(){
+
+
+
+    message.textContent =
+
+    "ご予約ありがとうございます。\n確認後、担当者よりご連絡いたします。";
+
+
+
+    message.style.color =
+    "green";
+
+
+
+    // フォームリセット
+
+    form.reset();
+
+
+
+
+    // 5秒後メッセージ消去
+
+    setTimeout(function(){
+
+
+      message.textContent = "";
+
+
+    },5000);
+
+
+
+  })
+
+
+
+  .catch(function(error){
+
 
 
     console.error(error);
 
 
+
     message.textContent =
-    "通信エラーです。";
+
+    "送信に失敗しました。";
 
 
-    message.style.color="red";
+    message.style.color =
+    "red";
+
 
 
   });
